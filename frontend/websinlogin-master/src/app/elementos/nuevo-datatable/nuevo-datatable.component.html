@@ -1,0 +1,28 @@
+<div class="mat-elevation-z8 mt-3">
+    <table *ngIf="show" mat-table [dataSource]="dataSource">
+        <div *ngFor="let column of columnsDisplay">
+            <ng-container [matColumnDef]="column.responseName">
+                <th mat-header-cell *matHeaderCellDef> {{column.label}} </th>
+                <div *ngIf="column.type =='string'">
+                    <td mat-cell *matCellDef="let row"> {{row[column.responseName]}}</td>
+                </div>
+                <div *ngIf="column.type =='percent'">
+                    <td mat-cell *matCellDef="let row"> {{row[column.responseName]?row[column.responseName]:0|number:'.0-5'}}%
+                    </td>
+                </div>
+                <div *ngIf="column.type =='date'">
+                    <td mat-cell *matCellDef="let row"> {{row[column.responseName]|toDate}} </td>
+                </div>
+                <div *ngIf="column.type =='currency'">
+                    <td mat-cell *matCellDef="let row"> {{row[column.responseName]|currencyPipe}} </td>
+                </div>
+
+            </ng-container>
+        </div>
+        <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsTable;">
+        </tr>
+    </table>
+    <app-loading [loading]="loadingTable"></app-loading>
+    <mat-paginator [length]="length" [pageSizeOptions]="[5, 10, 25, 100]" #paginatorPrincipal></mat-paginator>
+</div>

@@ -1,0 +1,239 @@
+<div *ngIf="show">
+    <div class="container mt-5 animated fadeIn">
+        <h2 class="d-flex justify-content-start">Contabilidad</h2>
+        <hr>
+        <div class="container pl-0 pr-0">
+            <div class="row">
+
+                <div class="col-xs-12 col-md-12 col-lg-6">
+                    <div class="p5 backgroundGral">
+                        <h3 class="text-center">Ingresar período</h3>
+                        <!--============= Formulario start =============-->
+                        <form [formGroup]="filtroEnviar">
+                            <div formGroupName="filtroObject">
+                                <div formGroupName="periodo" class="mt-5 p-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label class="w-100">
+                        <span>Fecha inicial</span>
+                        <input class="bs-datepicker-head" formControlName="fechaInicio" [minDate]="minDate"
+                          [maxDate]="maxDate" type="text" required="required" [bsConfig]="bsConfig" #dp="bsDatepicker"
+                          bsDatepicker />
+                      </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="w-100">
+                        <span>Fecha final</span>
+                        <input class="bs-datepicker-head" formControlName="fechaFin" [minDate]="minDate"
+                          [maxDate]="maxDate" type="text" required="required" [bsConfig]="bsConfig" #dp="bsDatepicker"
+                          bsDatepicker />
+                      </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form [formGroup]="objectSelect">
+                            <div class="row p-3">
+                                <div class="col-6 d-flex">
+                                    <div class="w-100">
+                                        <mat-select class="w-100 mt2" bindLabel="nombre" formControlName="tipo" placeholder="Filtrar">
+                                            <mat-option [value]="f.id" *ngFor="let f of filtroCombo">{{ f.nombre }}</mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="w-auto m-auto">
+                                        <button class="animated fadeIn fast" mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                      <mat-icon class="animated fadeIn fast size">close</mat-icon>
+                    </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <mat-form-field class="w-100">
+                                        <input matInput placeholder="Por" formControlName="valor" [matAutocomplete]="auto" required="required">
+                                    </mat-form-field>
+                                    <mat-autocomplete (optionSelected)="onChangePor($event.option.value)" #auto="matAutocomplete" [displayWith]="displayFn">
+                                        <mat-option *ngIf="isLoading2" class="is-loading">Cargando...</mat-option>
+                                        <ng-container *ngIf="!isLoading2">
+                                            <mat-option *ngFor="let object of objectFiltrados" [value]="object">
+                                                <span>{{ object.descripcion }}</span>
+                                            </mat-option>
+                                        </ng-container>
+                                    </mat-autocomplete>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <mat-chip-list>
+                                        <mat-chip *ngFor="let filter of filters" removable="true" (removed)="remove(filter)">
+                                            {{ filter.tipo }}:{{ filter.valor.descripcion }}
+                                            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                                        </mat-chip>
+                                    </mat-chip-list>
+                                </div>
+                            </div>
+                        </form>
+                        <!--============= Formulario end =============-->
+                        <button (click)="obtenerData()" class="btnAnalytics mt-3 mb-5 centrar">Consultar</button>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-6 marginTop">
+                    <div class="backgroundGral pb5">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <h3 class="text-center">Estado de cuenta</h3>
+                                <ul class="list-unstyled d-flex justify-content-center text-muted">
+                                    <li> Período: &nbsp;&nbsp; </li>
+                                    <li><span class="p-0"> {{fechaInicio|toDate}}</span>&nbsp;&nbsp; - &nbsp;&nbsp;</li>
+                                    <li><span class="p-0"> {{fechaFin|toDate}} </span> </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="mt-5">
+                            <hr class="hrIngresos">
+                            <div class="container">
+                                <ul class="list-group">
+                                    <li class="d-flex justify-content-between">
+                                        <h6>Ingresos</h6>
+                                        <span>{{datosDetalle.data.ingresos|currencyPipe}} </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <div class="mt-1">
+                            <hr class="hrIngresos">
+                            <div *ngIf="showDetalle" class="container">
+                                <div *ngIf="datosDetalle.data.anticipos.length>0">
+                                    <h6>Descuento de Anticipos</h6>
+                                    <div class="d-flex justify-content-between text-muted" *ngFor="let i of datosDetalle.data.anticipos">
+                                        <div>
+                                            <span><small> {{i.descripcion}}</small></span>
+                                            <span><small> &nbsp;{{i.periodo}}</small></span>
+                                        </div>
+                                        <div>
+                                            <span><small> {{i.monto|currencyPipe}}</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="datosDetalle.data.pagos.length>0">
+                                    <h6>Pago</h6>
+                                </div>
+                                <div *ngFor="let i of datosDetalle.data.pagos" class="d-flex justify-content-between text-muted">
+                                    <div>
+                                        <span><small>{{i.descripcion}}</small></span>
+                                        <span><small>&nbsp;{{i.periodo}}</small></span>
+                                    </div>
+                                    <div>
+                                        <span><small>{{i.monto|currencyPipe}}</small></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr *ngIf="showDetalle" class="hrIngresos">
+                        <div *ngIf="showDetalle && datosDetalle.saldo != null" class="container">
+                            <ul class="list-group">
+                                <li class="d-flex justify-content-between">
+                                    <h6>Saldo pendiente</h6>
+                                    <span>{{datosDetalle.saldo|currencyPipe}}</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <hr *ngIf="showDetalle" class="hrIngresos">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Graficos-->
+    <div class="container mt-10 p1" *ngIf="lineChartData.length > 0">
+        <div class="backgroundGral p5">
+            <ul class="list-unstyled" id="myTab" role="tablist">
+                <li>
+                    <h2 class="d-flex justify-content-start fontMobile">Tendencias de ingresos</h2>
+                    <hr>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active animated fadeIn" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div style="display: block;">
+                        <canvas baseChart width="400" height="100" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" legend="true" [chartType]="lineChartType" [plugins]="lineChartPlugins">
+            </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <button (click)="verMasDetalles()" class="btnAnalytics mt-3 mb-5 centrar">Ver detalles</button>
+    </div>
+</div>
+
+<!--Tablas-->
+<div *ngIf="showTable">
+    <div class="col-lg-12 p-3">
+        <ul class="nav nav-tabs backgroundTable" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a (click)="consultarTabla('sello')" class="nav-link" id="contact-tab" data-toggle="tab" href="#sello" role="tab" aria-controls="Imprint" aria-selected="false">Sellos</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="consultarTabla('artista')" class="nav-link" id="profile-tab" data-toggle="tab" href="#sello" role="tab" aria-controls="artista" aria-selected="false">Artistas</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="consultarTabla('album')" class="nav-link active" id="home-tab" data-toggle="tab" href="#sello" role="tab" aria-controls="Product" aria-selected="true">Albumes</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="consultarTabla('track')" class="nav-link" id="contact-tab" data-toggle="tab" href="#sello" role="tab" aria-controls="Track" aria-selected="false">Tracks</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="consultarTabla('servicio')" class="nav-link" id="contact-tab" data-toggle="tab" href="#sello" role="tab" aria-controls="Source" aria-selected="false">Servicios</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="consultarTabla('pais')" class="nav-link" id="contact-tab" data-toggle="tab" href="#sello" role="tab" aria-controls="Country" aria-selected="false">País</a>
+            </li>
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="sello" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="mat-elevation-z8 mt-3">
+                    <table mat-table [dataSource]="dataSource" matSort>
+                        <div *ngFor="let column of columnsDisplay">
+                            <ng-container [matColumnDef]="column.responseName">
+                                <th mat-header-cell *matHeaderCellDef> {{column.label}} </th>
+                                <div *ngIf="column.type =='string'">
+                                    <td mat-cell *matCellDef="let row"> {{row[column.responseName]}}</td>
+                                </div>
+                                <div *ngIf="column.type =='percent'">
+                                    <td mat-cell *matCellDef="let row"> {{row[column.responseName]?row[column.responseName]:0|number:'.0-5'}}%
+                                    </td>
+                                </div>
+                                <div *ngIf="column.type =='date'">
+                                    <td mat-cell *matCellDef="let row"> {{row[column.responseName]|toDate}} </td>
+                                </div>
+                                <div *ngIf="column.type =='currency'">
+                                    <td mat-cell *matCellDef="let row"> {{row[column.responseName]|currencyPipe}} </td>
+                                </div>
+
+                            </ng-container>
+                        </div>
+                        <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
+                        <tr mat-row *matRowDef="let row; columns: columnsTable;">
+                        </tr>
+                    </table>
+                    <mat-paginator (page)="pageChange($event)" [length]="length" [pageSizeOptions]="[10, 25, 100]" #paginatorPrincipal></mat-paginator>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-loading [loading]="loading"></app-loading>

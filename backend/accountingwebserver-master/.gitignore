@@ -1,0 +1,16 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Others
+profile.sh
+serverless.env.yml
+
+
+package-lock.json
+.env
+.ebextensions/
+.elasticbeanstalk/

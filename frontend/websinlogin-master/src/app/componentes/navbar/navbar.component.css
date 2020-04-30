@@ -1,0 +1,140 @@
+.navbar {
+    background-color: black;
+    width: 100%;
+}
+
+li a {
+    color: #f4da30;
+    display: block;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-right: 30px !important;
+    transition: color 1s;
+    cursor: pointer;
+}
+.navLink{
+    cursor: pointer;
+}
+label {
+    margin-bottom: .0rem;
+    width: 100px;
+    line-height: 10px;
+}
+
+.class-icon {
+    font-size: 1em;
+    color: #edd920;
+    margin-left: 2%;
+    margin-right: 0;
+}
+
+li a:hover {
+    color: #fafafa;
+}
+
+.active {
+    color: #fafafa;
+}
+
+.dropdown-menu {
+    background-color: black!important;
+}
+.dropdown-toggle::after{
+    margin-top:.3rem;
+}
+.dropdown-menu a:hover, .log {
+    background-color: black !important;
+    color: white;
+}
+.dropdown-item:focus, .dropdown-item:hover{
+    background-color:black;
+}
+
+.logout {
+    color:#f4da30;
+    cursor: pointer;
+}
+
+.logout:hover {
+    color: #fafafa;
+}
+
+.navbar-collapse {
+    width: 100%;
+}
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+@media screen and (max-width:1270px) {
+    .navbar-collapse {
+        margin-left: calc(50%-15px) ;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .navbar-collapse {
+        margin-left: calc(50%-10px) ;
+    }
+    .navbar-brand {
+        margin-left: 0% ;
+    }
+    li a {
+        color: white;
+        display: block;
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        padding-right: 30px ;
+        transition: color 1s;
+    }
+    .logout {
+        margin-left: 1%;
+        color: white;
+        cursor: pointer;
+        display: block;
+    }
+}

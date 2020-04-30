@@ -1,0 +1,13 @@
+::ng-deep.dropdown-item.active {
+    background-color: #edd920 !important;
+    color: black;
+    font-weight: bold;
+}
+
+.ng-invalid {
+    border-color: red !important;
+}
+
+mat-form-field {
+    width: 100%;
+}

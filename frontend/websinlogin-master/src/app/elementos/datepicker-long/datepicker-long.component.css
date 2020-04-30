@@ -1,0 +1,15 @@
+.example-month-picker .mat-calendar-period-button {
+    pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+    display: none;
+}
+
+::ng-deep.mat-datepicker-toggle-active {
+    color: black!important;
+}
+
+::ng-deep.mat-calendar-body-selected {
+    background-color: #f4da30!important;
+}

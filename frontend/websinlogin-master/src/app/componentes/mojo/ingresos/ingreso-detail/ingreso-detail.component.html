@@ -1,0 +1,32 @@
+<div>
+    <label><strong>Ingresos periodo {{titulo}}</strong></label>
+    <hr>
+</div>
+<br>
+<div class="row">
+    <div class="table-responsive col-lg-12">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Track</th>
+                    <th scope="col">Canal</th>
+                    <th scope="col">País</th>
+                    <th scope="col">Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of ingresoPeriodoData|paginate: { itemsPerPage: 15, currentPage: p }">
+                    <td>{{data.nombreTrack}}</td>
+                    <td>{{data.canal}}</td>
+                    <td>{{data.pais}}</td>
+                    <td>{{data.monto|currency:'USD'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-right">
+
+    </div>
+</div>

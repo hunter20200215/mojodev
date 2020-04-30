@@ -1,0 +1,31 @@
+{
+  "name": "accountingwebserver",
+  "version": "1.0.0",
+  "description": "api para accounting ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "saulo manograsso",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.6.1",
+    "aws-cognito-express": "^1.6.0",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "execution-time": "^1.4.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.3.0",
+    "helmet": "^3.21.2",
+    "lodash": "^4.17.15",
+    "method-override": "^3.0.0",
+    "moment": "^2.24.0",
+    "mysql2": "^2.0.1",
+    "sqlstring": "^2.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}

@@ -1,0 +1,24 @@
+<form *ngIf="responseType != 'nombre'" [formGroup]="form">
+    <mat-form-field class="example-full-width">
+        <input type="text" [placeholder]="placeHolder" matInput [formControlName]="name" [matAutocomplete]="auto" required>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFnDescripcion">
+            <mat-option *ngIf="isLoading" class="is-loading">Cargando...</mat-option>
+            <mat-option *ngFor="let object of objectFiltrados" [value]="object">
+                <label>{{object.descripcion}}</label>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
+
+<form *ngIf="responseType == 'nombre'" [formGroup]="form">
+    <mat-form-field class="example-full-width">
+        <input type="text" [placeholder]="placeHolder" matInput [formControlName]="name" [matAutocomplete]="auto" required [readonly]="read">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFnNombre">
+            <mat-option *ngIf="isLoading" class="is-loading">Cargando...</mat-option>
+            <mat-option *ngFor="let object of objectFiltrados" [value]="object">
+                <label>{{object.nombre}}</label>
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="!isValid">No hay datos</mat-error>
+    </mat-form-field>
+</form>

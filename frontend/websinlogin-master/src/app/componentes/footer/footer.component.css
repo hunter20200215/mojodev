@@ -1,0 +1,37 @@
+  small{
+    color:#f4da30;
+  }
+  footer{
+    position: static;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    padding-top: 20px;
+  }
+
+  .row {
+      width: 100% ;
+  }
+  .icon-style {
+      font-size: 25px;
+      color: #edd920;
+      margin-left: 18%;
+      transition: 1s;
+  }  
+  .col-md-4 {
+      margin-bottom: 20px ;
+  }
+  
+  @media screen and (max-width:1070px) {
+      .col-md-4 {
+          margin-left: 20px;
+      }
+  }
+  
+  @media(max-width:767px) {
+      .icon-style {
+          margin-left: 10%;
+      }
+  }
+  

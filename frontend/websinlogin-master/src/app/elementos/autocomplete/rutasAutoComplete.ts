@@ -1,0 +1,36 @@
+export const rutas:any[] = [
+    {
+        name:"track",
+        url:"https://.execute-api.us-east-1.amazonaws.com/prd/search?name="
+    },
+    {
+        name:"albumGenero",
+        url:"https://.execute-api.us-east-1.amazonaws.com/dev/search?search="
+    },
+    {
+        name:"albumArtista",
+        url:"https://.execute-api.us-east-1.amazonaws.com/dev/?search="
+    },
+    {
+        name:"albumTipo",
+        url:"https://.execute-api.us-east-1.amazonaws.com/dev/search?search="
+    },
+    {
+        name:"pais",
+        url:"https://.execute-api.us-east-1.amazonaws.com/dev/search?search="
+    },
+    ,
+    {
+        name:"afiliado",
+        url:"https://38m3c0536e.execute-api.us-east-1.amazonaws.com/dev/afiliado/search?search="
+    },
+    {
+        name:"trackAnalitycs",
+        url:"https://ds2o6mr54h.execute-api.us-east-1.amazonaws.com/dev/analitycs/track?search="
+    },
+    {
+        name:"getArtista",
+        url:"https://ds2o6mr54h.execute-api.us-east-1.amazonaws.com/dev/account/aquery?search="
+    }
+
+];

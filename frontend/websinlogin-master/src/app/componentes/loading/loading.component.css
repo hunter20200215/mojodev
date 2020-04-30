@@ -1,0 +1,6 @@
+.logo-mojo {
+    position: fixed;
+    bottom: 36%;
+    left:50%;
+    transform: translateX(-50%) translateY(50%)
+}

@@ -1,0 +1,9 @@
+[{
+        "Perfil": "ADMIN",
+        "Permisos": ["analitica", "anticipo", "ingresos", "afiliado", "catalogo", "perfil", "usuarios", "subir", "egresos", "ganancias"]
+    },
+    {
+        "Perfil": "AFILIADO",
+        "Permisos": ["perfil", "ingresos", "ganancias"]
+    }
+]
